@@ -122,6 +122,12 @@ fi
 
 # Configure Nginx
 echo "🌐 Configuring Nginx..."
+
+# Remove old configs
+rm -f /etc/nginx/sites-enabled/dashboard
+rm -f /etc/nginx/sites-available/dashboard
+rm -f /etc/nginx/sites-enabled/default
+
 cat > /etc/nginx/sites-available/dashboard << EOF
 server {
     listen 80 default_server;
@@ -133,11 +139,7 @@ server {
     add_header X-XSS-Protection "1; mode=block" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header Referrer-Policy "no-referrer-when-downgrade" always;
-    add_header Content-Security-Policy "default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; font-src 'self' data:;" always;
 
-    # Rate limiting
-    limit_req_zone \$binary_remote_addr zone=login:10m rate=5r/m;
-    
     # Main proxy
     location / {
         proxy_pass http://localhost:8080;
@@ -154,16 +156,6 @@ server {
         proxy_connect_timeout 60s;
         proxy_send_timeout 60s;
         proxy_read_timeout 60s;
-    }
-
-    # Login rate limiting
-    location /api/login {
-        limit_req zone=login burst=3 nodelay;
-        proxy_pass http://localhost:8080;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
     }
 
     # Health check
