@@ -20,15 +20,9 @@ function Dashboard({ systemHealth }) {
         setVpsStatus(vpsResponse.data);
         setPortForwards(forwardsResponse.data.data || []);
         
-        // Mock network stats for chart
-        setNetworkStats([
-          { time: '00:00', cpu: 20, memory: 45, network: 12 },
-          { time: '04:00', cpu: 25, memory: 48, network: 18 },
-          { time: '08:00', cpu: 60, memory: 62, network: 35 },
-          { time: '12:00', cpu: 45, memory: 55, network: 28 },
-          { time: '16:00', cpu: 70, memory: 68, network: 42 },
-          { time: '20:00', cpu: 30, memory: 52, network: 22 },
-        ]);
+        // Real network stats would come from API
+        // setNetworkStats(await api.getNetworkStats());
+        setNetworkStats([]); // Empty for production
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
       } finally {

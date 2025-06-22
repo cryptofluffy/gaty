@@ -7,32 +7,6 @@ function LicenseManager({ licenseInfo, setLicenseInfo }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const demoLicenses = {
-    'STARTER-123-456': {
-      plan: 'Starter',
-      gatewaysLimit: 1,
-      gatewaysUsed: 0,
-      status: 'active',
-      expires: '2024-12-31',
-      features: ['Basic Gateway Management', 'Port Forwarding', 'DNS Management']
-    },
-    'PRO-789-012': {
-      plan: 'Professional',
-      gatewaysLimit: 5,
-      gatewaysUsed: 2,
-      status: 'active',
-      expires: '2024-12-31',
-      features: ['Advanced Gateway Management', 'Port Forwarding', 'DNS Management', 'Network Monitoring', 'Analytics']
-    },
-    'ENT-345-678': {
-      plan: 'Enterprise',
-      gatewaysLimit: 999,
-      gatewaysUsed: 12,
-      status: 'active',
-      expires: '2024-12-31',
-      features: ['Unlimited Gateways', 'All Features', 'Priority Support', 'Custom Integrations', 'SLA']
-    }
-  };
 
   const activateLicense = async (key) => {
     try {
@@ -40,20 +14,12 @@ function LicenseManager({ licenseInfo, setLicenseInfo }) {
       setError('');
       setSuccess('');
 
-      await new Promise(resolve => setTimeout(resolve, 1500));
-
-      const license = demoLicenses[key];
-      if (license) {
-        setLicenseInfo(license);
-        localStorage.setItem('licenseKey', key);
-        localStorage.setItem('licenseInfo', JSON.stringify(license));
-        setSuccess('License erfolgreich aktiviert!');
-        setLicenseKey('');
-      } else {
-        throw new Error('Ungültiger Lizenzschlüssel');
-      }
+      // Hier würde die echte Lizenz-API-Integration stehen
+      // Beispiel: const response = await licenseApi.validate(key);
+      
+      setError('License validation system not configured. Please contact administrator.');
     } catch (error) {
-      setError('Ungültiger Lizenzschlüssel. Bitte überprüfen Sie den Schlüssel.');
+      setError('Error validating license. Please try again.');
     } finally {
       setLoading(false);
     }

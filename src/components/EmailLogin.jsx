@@ -6,39 +6,6 @@ function EmailLogin({ onLogin }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Demo-Benutzer für schnelles Login
-  const demoUsers = {
-    'demo@starter.com': {
-      email: 'demo@starter.com',
-      subscription: {
-        id: 'sub_starter_123',
-        status: 'active',
-        quantity: 1,
-        plan: 'Starter'
-      },
-      authenticated: true
-    },
-    'demo@pro.com': {
-      email: 'demo@pro.com',
-      subscription: {
-        id: 'sub_pro_456',
-        status: 'active',
-        quantity: 5,
-        plan: 'Professional'
-      },
-      authenticated: true
-    },
-    'demo@enterprise.com': {
-      email: 'demo@enterprise.com',
-      subscription: {
-        id: 'sub_ent_789',
-        status: 'active',
-        quantity: 50,
-        plan: 'Enterprise'
-      },
-      authenticated: true
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,26 +13,15 @@ function EmailLogin({ onLogin }) {
     setError('');
 
     try {
-      // Simuliere API-Aufruf
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      const user = demoUsers[email];
-      if (user) {
-        onLogin(user);
-      } else {
-        setError('No valid license found for this email address. Please use a demo account.');
-      }
+      // Hier würde die echte API-Integration stehen
+      // Beispiel: const response = await authApi.login(email);
+      
+      setError('Authentication system not configured. Please contact administrator.');
     } catch (err) {
-      setError('Unable to validate license. Please try again.');
+      console.error('Login error:', err);
+      setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleDemoLogin = (demoEmail) => {
-    const user = demoUsers[demoEmail];
-    if (user) {
-      onLogin(user);
     }
   };
 
