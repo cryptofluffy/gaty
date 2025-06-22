@@ -6,8 +6,8 @@
 
 set -e
 
-DOMAIN=${1:-"localhost"}
-REPO_URL="https://github.com/cryptofluffy/gateway-project.git"
+DOMAIN=${1:-""}
+REPO_URL="https://github.com/cryptofluffy/gaty.git"
 INSTALL_DIR="/root/dashboard"
 
 echo "🚀 Dashboard Quick Install - Frischer Server"
@@ -124,9 +124,9 @@ fi
 echo "🌐 Configuring Nginx..."
 cat > /etc/nginx/sites-available/dashboard << EOF
 server {
-    listen 80;
-    listen [::]:80;
-    server_name $DOMAIN;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
 
     # Security headers
     add_header X-Frame-Options "SAMEORIGIN" always;
@@ -197,10 +197,14 @@ nginx -t
 systemctl enable nginx
 systemctl restart nginx
 
-# Setup SSL if domain is not localhost
-if [ "$DOMAIN" != "localhost" ] && [ "$DOMAIN" != "" ]; then
-    echo "🔒 Setting up SSL certificate..."
-    echo "Attempting automatic SSL setup for $DOMAIN..."
+# Skip SSL setup for IP-only access
+if [ "$DOMAIN" != "" ]; then
+    echo "🔒 Setting up SSL certificate for domain: $DOMAIN"
+    echo "Updating Nginx config for domain..."
+    
+    # Update server_name in config
+    sed -i "s/server_name _;/server_name $DOMAIN;/" /etc/nginx/sites-available/dashboard
+    systemctl restart nginx
     
     # Try to get SSL certificate
     if certbot --nginx -d $DOMAIN --non-interactive --agree-tos --email admin@$DOMAIN --redirect; then
@@ -209,6 +213,8 @@ if [ "$DOMAIN" != "localhost" ] && [ "$DOMAIN" != "" ]; then
         echo "⚠️ SSL setup failed, but dashboard is accessible via HTTP"
         echo "You can manually run: certbot --nginx -d $DOMAIN"
     fi
+else
+    echo "ℹ️ No domain specified - dashboard will be accessible via server IP"
 fi
 
 # Create management scripts
@@ -327,15 +333,20 @@ fi
 
 echo ""
 echo "🌐 Access your dashboard:"
-if [ "$DOMAIN" != "localhost" ] && [ "$DOMAIN" != "" ]; then
+SERVER_IP=$(curl -s ifconfig.me 2>/dev/null || curl -s icanhazip.com 2>/dev/null || echo "YOUR-SERVER-IP")
+if [ "$DOMAIN" != "" ]; then
     echo "   HTTP:  http://$DOMAIN"
     if certbot certificates 2>/dev/null | grep -q $DOMAIN; then
         echo "   HTTPS: https://$DOMAIN"
     fi
+    echo "   IP:    http://$SERVER_IP (also works)"
 else
-    SERVER_IP=$(curl -s ifconfig.me 2>/dev/null || curl -s icanhazip.com 2>/dev/null || echo "YOUR-SERVER-IP")
     echo "   IP:    http://$SERVER_IP"
     echo "   Local: http://localhost (from server)"
+    echo ""
+    echo "💡 To add a domain later:"
+    echo "   1. Point your domain DNS to this IP: $SERVER_IP"
+    echo "   2. Run: certbot --nginx -d yourdomain.com"
 fi
 
 echo ""
