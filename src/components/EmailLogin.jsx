@@ -138,48 +138,6 @@ function EmailLogin({ onLogin }) {
           </button>
         </form>
 
-        {/* Demo Section */}
-        <div style={{
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-          paddingTop: '2rem'
-        }}>
-          <h3 style={{ color: '#FFFFFF', marginBottom: '1rem' }}>
-            Demo Accounts
-          </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {Object.entries(demoUsers).map(([demoEmail, userData]) => (
-              <button
-                key={demoEmail}
-                onClick={() => handleDemoLogin(demoEmail)}
-                disabled={loading}
-                style={{
-                  padding: '0.75rem',
-                  background: '#343A40',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '8px',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                  color: '#ADB5BD',
-                  fontSize: '0.875rem',
-                  transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => {
-                  if (!loading) {
-                    e.target.style.background = '#495057';
-                    e.target.style.borderColor = '#F0B90B';
-                    e.target.style.color = '#FFFFFF';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = '#343A40';
-                  e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                  e.target.style.color = '#ADB5BD';
-                }}
-              >
-                {demoEmail} - {userData.subscription.plan} Plan ({userData.subscription.quantity} Gateways)
-              </button>
-            ))}
-          </div>
-        </div>
 
         {/* Info */}
         <div style={{
