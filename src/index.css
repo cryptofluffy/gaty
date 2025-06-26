@@ -38,32 +38,37 @@ h1 {
 /* Button Base Styles */
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid #6366f1;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #6366f1;
   color: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 button:hover {
-  background-color: #646cff;
-  border-color: #646cff;
+  background-color: #8b5cf6;
+  border-color: #8b5cf6;
   transform: translateY(-1px);
 }
 
 button:active {
+  background-color: #8b5cf6;
+  border-color: #8b5cf6;
   transform: translateY(0);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 2px solid #646cff;
-  outline-offset: 2px;
+  outline: none !important;
+  box-shadow: 0 0 0 2px #8b5cf6 !important;
+  background-color: #8b5cf6;
+  border-color: #8b5cf6;
 }
 
 button:disabled {
@@ -78,14 +83,15 @@ button:disabled {
   align-items: center;
   gap: 0.5rem;
   border-radius: 6px;
-  border: 1px solid transparent;
+  border: 1px solid #6366f1;
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -105,13 +111,24 @@ button:disabled {
 .btn-secondary {
   background-color: #6366f1;
   color: #ffffff;
-  border-color: #6366f1;
+  border: 1px solid #6366f1;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .btn-secondary:hover {
   background-color: #8b5cf6;
-  border-color: #8b5cf6;
+  border: 1px solid #8b5cf6;
   transform: translateY(-1px);
+  outline: none !important;
+}
+
+.btn-secondary:focus,
+.btn-secondary:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #8b5cf6 !important;
+  background-color: #8b5cf6;
+  border: 1px solid #8b5cf6;
 }
 
 .btn-outline {
