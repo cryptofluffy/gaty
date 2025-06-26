@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mail, ArrowRight, Shield, Loader, AlertCircle } from 'lucide-react';
+import { fastspringApi } from '../services/fastspringApi';
 
 function EmailLogin({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -13,13 +14,21 @@ function EmailLogin({ onLogin }) {
     setError('');
 
     try {
-      // Hier würde die echte API-Integration stehen
-      // Beispiel: const response = await authApi.login(email);
+      // FastSpring API Integration
+      const response = await fastspringApi.validateCustomerLicense(email);
       
-      setError('Authentication system not configured. Please contact administrator.');
+      if (response.valid) {
+        // Erfolgreicher Login
+        onLogin({
+          email: email,
+          subscription: response.subscription
+        });
+      } else {
+        setError('No valid license found for this email address.');
+      }
     } catch (err) {
       console.error('Login error:', err);
-      setError('Login failed. Please try again.');
+      setError('Login failed. Please check your internet connection and try again.');
     } finally {
       setLoading(false);
     }
