@@ -237,7 +237,7 @@ html, body {
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 1.5rem;
-  border: none;
+  border: 1px solid transparent;
   background: none;
   color: #ADB5BD;
   font-weight: 500;
@@ -245,6 +245,7 @@ html, body {
   border-bottom: 3px solid transparent;
   transition: all 200ms ease-in-out;
   position: relative;
+  border-radius: 8px 8px 0 0;
 }
 
 .nav-tab:hover {
@@ -257,10 +258,9 @@ html, body {
 
 .nav-tab.active {
   color: #F0B90B;
-  border-bottom-color: #F0B90B;
-  background: rgba(240, 185, 11, 0.05);
   border: 1px solid #F0B90B;
   border-bottom: 3px solid #F0B90B;
+  background: rgba(240, 185, 11, 0.05);
   border-radius: 8px 8px 0 0;
 }
 
