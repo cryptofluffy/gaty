@@ -1,0 +1,68 @@
+# Node.js Dependencies und Cache / Node.js Dependencies and Cache
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Umgebungsvariablen / Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs / Logs
+logs/
+*.log
+
+# Runtime Daten / Runtime Data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage und Test Artefakte / Coverage and Test Artifacts
+coverage/
+.nyc_output/
+.coverage/
+.jest/
+
+# Development Tools / Development Tools
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generierte Dateien / OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git Dateien / Git Files
+.git/
+.gitignore
+
+# Docker Dateien / Docker Files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# README und Dokumentation / README and Documentation
+README.md
+docs/
+*.md
+
+# Backup Dateien / Backup Files
+*.bak
+*.backup
+*.old
+
+# Temporäre Dateien / Temporary Files
+tmp/
+temp/
+.tmp/

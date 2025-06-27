@@ -238,12 +238,12 @@ html, body {
   gap: 0.5rem;
   padding: 1rem 1.5rem;
   border: 1px solid transparent;
-  background: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
   color: #ADB5BD;
   font-weight: 500;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
-  transition: all 200ms ease-in-out;
+  transition: border-color 200ms ease-in-out, color 200ms ease-in-out, background-color 200ms ease-in-out;
   position: relative;
   border-radius: 8px 8px 0 0;
 }
@@ -251,17 +251,15 @@ html, body {
 .nav-tab:hover {
   color: #FFFFFF;
   background: rgba(138, 43, 226, 0.05);
-  border: 1px solid #8A2BE2;
-  border-bottom: 3px solid #8A2BE2;
-  border-radius: 8px 8px 0 0;
+  border-color: #8A2BE2;
+  border-bottom-color: #8A2BE2;
 }
 
 .nav-tab.active {
   color: #F0B90B;
-  border: 1px solid #F0B90B;
-  border-bottom: 3px solid #F0B90B;
+  border-color: #F0B90B;
+  border-bottom-color: #F0B90B;
   background: rgba(240, 185, 11, 0.05);
-  border-radius: 8px 8px 0 0;
 }
 
 /* Main Content */

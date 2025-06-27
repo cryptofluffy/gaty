@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Debug Test</title>
+</head>
+<body>
+    <h1>Simple JavaScript Test</h1>
+    <div id="status">❌ JavaScript not executed yet</div>
+    <div id="api-status">❌ API not tested yet</div>
+    
+    <script>
+        console.log('Simple script starting...');
+        
+        // Test 1: Basic JavaScript execution
+        document.getElementById('status').innerHTML = '✅ JavaScript execution working!';
+        console.log('Basic JavaScript working');
+        
+        // Test 2: API call without modules
+        fetch('/api/health')
+            .then(response => {
+                console.log('API response received:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('API data:', data);
+                document.getElementById('api-status').innerHTML = '✅ API working: ' + JSON.stringify(data);
+            })
+            .catch(error => {
+                console.error('API error:', error);
+                document.getElementById('api-status').innerHTML = '❌ API error: ' + error.message;
+            });
+    </script>
+</body>
+</html>
